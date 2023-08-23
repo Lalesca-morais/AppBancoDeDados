@@ -28,3 +28,7 @@ Cadastre um novo usuário inserindo um nome de usuário e senha quando solicitad
 Faça login com as credenciais cadastradas.
 
 O programa informará se o login foi bem-sucedido ou se o usuário não foi encontrado no banco de dados.
+
+## Linguagem
+
+O sistema foi desenvolvido 100% em Java.
