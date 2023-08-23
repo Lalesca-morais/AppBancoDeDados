@@ -4,9 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
-
-public class Teste2 {
-    public static void main(String[] args) {
+public class Methods {
+    public void methods(){
         try {
             Connection connection = DriverManager.getConnection("jdbc:sqlite:usuarios.db");
 
@@ -20,27 +19,27 @@ public class Teste2 {
 
             Scanner scanner = new Scanner(System.in);
 
-            System.out.print("Digite o nome de usuário: ");
-            String nomeUsuario = scanner.nextLine();
+            System.out.print("Digite o nome de usuário para cadastro: ");
+            String userName = scanner.nextLine();
             System.out.print("Digite a senha: ");
             String senha = scanner.nextLine();
 
             String insertSQL = "INSERT INTO usuarios (nome, senha) VALUES (?, ?)";
             PreparedStatement insertStatement = connection.prepareStatement(insertSQL);
-            insertStatement.setString(1, nomeUsuario);
+            insertStatement.setString(1, userName);
             insertStatement.setString(2, senha);
             insertStatement.executeUpdate();
 
             System.out.println("Usuário cadastrado com sucesso!");
 
             System.out.print("\nDigite o nome de usuário para fazer login: ");
-            String nomeUsuarioLogin = scanner.nextLine();
+            String userNameLogin = scanner.nextLine();
             System.out.print("Digite a senha: ");
             String senhaLogin = scanner.nextLine();
 
             String loginSQL = "SELECT * FROM usuarios WHERE nome = ? AND senha = ?";
             PreparedStatement loginStatement = connection.prepareStatement(loginSQL);
-            loginStatement.setString(1, nomeUsuarioLogin);
+            loginStatement.setString(1, userNameLogin);
             loginStatement.setString(2, senhaLogin);
 
             ResultSet resultSet = loginStatement.executeQuery();
@@ -51,15 +50,13 @@ public class Teste2 {
                 System.out.println("\nUsuários cadastrados no banco de dados:");
                 ListUsers.listUsers(connection);
             } else {
-                System.out.println("Nome de usuário ou senha incorretos ou usuário não encontrado no banco de dados. Tente novamente.");
+                System.out.println("Usuário/senha incorretos ou usuário não encontrado no banco de dados. Tente novamente.");
             }
-
             resultSet.close();
             loginStatement.close();
             insertStatement.close();
             createTableStatement.close();
             connection.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
