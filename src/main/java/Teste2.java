@@ -31,7 +31,7 @@ public class Teste2 {
             insertStatement.setString(2, senha);
             insertStatement.executeUpdate();
 
-            System.out.println("\nUsuário cadastrado com sucesso!");
+            System.out.println("Usuário cadastrado com sucesso!");
 
             System.out.print("\nDigite o nome de usuário para fazer login: ");
             String nomeUsuarioLogin = scanner.nextLine();
@@ -46,10 +46,10 @@ public class Teste2 {
             ResultSet resultSet = loginStatement.executeQuery();
 
             if (resultSet.next()) {
-                System.out.println("Login bem-sucedido!");
+                System.out.println("\nLogin bem-sucedido!");
 
-                System.out.println("Usuários no banco de dados:");
-                listUsers(connection);
+                System.out.println("\nUsuários cadastrados no banco de dados:");
+                ListUsers.listUsers(connection);
             } else {
                 System.out.println("Nome de usuário ou senha incorretos ou usuário não encontrado no banco de dados. Tente novamente.");
             }
@@ -63,19 +63,5 @@ public class Teste2 {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private static void listUsers(Connection connection) throws SQLException {
-        String listUsersSQL = "SELECT * FROM usuarios";
-        PreparedStatement listarUsuariosStatement = connection.prepareStatement(listUsersSQL);
-        ResultSet resultSet = listarUsuariosStatement.executeQuery();
-
-        while (resultSet.next()) {
-            int id = resultSet.getInt("id");
-            String nome = resultSet.getString("nome");
-            System.out.println("ID: " + id + ", Nome de Usuário: " + nome);
-        }
-        resultSet.close();
-        listarUsuariosStatement.close();
     }
 }
