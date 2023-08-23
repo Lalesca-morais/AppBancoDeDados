@@ -20,26 +20,26 @@ public class Methods {
             Scanner scanner = new Scanner(System.in);
 
             System.out.print("Digite o nome de usuário para cadastro: ");
-            String nomeUsuario = scanner.nextLine();
+            String userName = scanner.nextLine();
             System.out.print("Digite a senha: ");
             String senha = scanner.nextLine();
 
             String insertSQL = "INSERT INTO usuarios (nome, senha) VALUES (?, ?)";
             PreparedStatement insertStatement = connection.prepareStatement(insertSQL);
-            insertStatement.setString(1, nomeUsuario);
+            insertStatement.setString(1, userName);
             insertStatement.setString(2, senha);
             insertStatement.executeUpdate();
 
             System.out.println("Usuário cadastrado com sucesso!");
 
             System.out.print("\nDigite o nome de usuário para fazer login: ");
-            String nomeUsuarioLogin = scanner.nextLine();
+            String userNameLogin = scanner.nextLine();
             System.out.print("Digite a senha: ");
             String senhaLogin = scanner.nextLine();
 
             String loginSQL = "SELECT * FROM usuarios WHERE nome = ? AND senha = ?";
             PreparedStatement loginStatement = connection.prepareStatement(loginSQL);
-            loginStatement.setString(1, nomeUsuarioLogin);
+            loginStatement.setString(1, userNameLogin);
             loginStatement.setString(2, senhaLogin);
 
             ResultSet resultSet = loginStatement.executeQuery();
@@ -52,13 +52,11 @@ public class Methods {
             } else {
                 System.out.println("Usuário/senha incorretos ou usuário não encontrado no banco de dados. Tente novamente.");
             }
-
             resultSet.close();
             loginStatement.close();
             insertStatement.close();
             createTableStatement.close();
             connection.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
