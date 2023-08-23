@@ -4,9 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
-
-public class Teste2 {
-    public static void main(String[] args) {
+public class Methods {
+    public void methods(){
         try {
             Connection connection = DriverManager.getConnection("jdbc:sqlite:usuarios.db");
 
@@ -20,7 +19,7 @@ public class Teste2 {
 
             Scanner scanner = new Scanner(System.in);
 
-            System.out.print("Digite o nome de usuário: ");
+            System.out.print("Digite o nome de usuário para cadastro: ");
             String nomeUsuario = scanner.nextLine();
             System.out.print("Digite a senha: ");
             String senha = scanner.nextLine();
@@ -51,7 +50,7 @@ public class Teste2 {
                 System.out.println("\nUsuários cadastrados no banco de dados:");
                 ListUsers.listUsers(connection);
             } else {
-                System.out.println("Nome de usuário ou senha incorretos ou usuário não encontrado no banco de dados. Tente novamente.");
+                System.out.println("Usuário/senha incorretos ou usuário não encontrado no banco de dados. Tente novamente.");
             }
 
             resultSet.close();

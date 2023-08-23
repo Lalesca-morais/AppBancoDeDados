@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 public class ListUsers {
     static void listUsers(Connection connection) throws SQLException {
         String listarUsuariosSQL = "SELECT * FROM usuarios";
-        PreparedStatement listarUsuariosStatement = connection.prepareStatement(listarUsuariosSQL);
-        ResultSet resultSet = listarUsuariosStatement.executeQuery();
+        PreparedStatement listUsersStatement = connection.prepareStatement(listarUsuariosSQL);
+        ResultSet resultSet = listUsersStatement.executeQuery();
 
         Stream.generate(() -> "".repeat(40)).limit(2).forEach(System.out::println);
         while (resultSet.next()) {
@@ -18,6 +18,6 @@ public class ListUsers {
             Stream.generate(() -> "-".repeat(40)).limit(1).forEach(System.out::println);
         }
         resultSet.close();
-        listarUsuariosStatement.close();
+        listUsersStatement.close();
     }
 }
