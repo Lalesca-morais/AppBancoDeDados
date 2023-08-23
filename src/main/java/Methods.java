@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Methods {
     public void methods(){
         try {
+            Scanner scanner = new Scanner(System.in);
             Connection connection = DriverManager.getConnection("jdbc:sqlite:usuarios.db");
 
             String createTableSQL = "CREATE TABLE IF NOT EXISTS usuarios (" +
@@ -16,8 +17,6 @@ public class Methods {
                     ")";
             PreparedStatement createTableStatement = connection.prepareStatement(createTableSQL);
             createTableStatement.execute();
-
-            Scanner scanner = new Scanner(System.in);
 
             System.out.print("Digite o nome de usuário para cadastro: ");
             String userName = scanner.nextLine();
