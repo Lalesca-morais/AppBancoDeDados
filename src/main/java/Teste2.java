@@ -47,8 +47,11 @@ public class Teste2 {
 
             if (resultSet.next()) {
                 System.out.println("Login bem-sucedido!");
+
+                System.out.println("Usuários no banco de dados:");
+                listUsers(connection);
             } else {
-                System.out.println("Nome de usuário ou senha incorretos/usuário não encontrado no banco de dados. Tente novamente.");
+                System.out.println("Nome de usuário ou senha incorretos ou usuário não encontrado no banco de dados. Tente novamente.");
             }
 
             resultSet.close();
@@ -60,5 +63,19 @@ public class Teste2 {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void listUsers(Connection connection) throws SQLException {
+        String listUsersSQL = "SELECT * FROM usuarios";
+        PreparedStatement listarUsuariosStatement = connection.prepareStatement(listUsersSQL);
+        ResultSet resultSet = listarUsuariosStatement.executeQuery();
+
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String nome = resultSet.getString("nome");
+            System.out.println("ID: " + id + ", Nome de Usuário: " + nome);
+        }
+        resultSet.close();
+        listarUsuariosStatement.close();
     }
 }
